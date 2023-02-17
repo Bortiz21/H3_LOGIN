@@ -26,21 +26,33 @@ if verify.lower() == 'y':
     user_credentials = user_name + ' ' + user_pass
     # If the credentials are found in the dictionary, they will be granted access.
     for user in users:
-        if users[user]['name'] == str(user_name):
+        if users[user]['name'] == str(user_name) and users[user]['pass'] == str(user_pass):
             # Once logged, the user's role is determined. A welcome message should be displayed if they are a
             # standard user.
-            print("You are a user, congrats!")
-            break
+            current_user = users[user]['name']
+            current_user_pass = users[user]['pass']
+            current_role = users[user]['role']
+
+            print("\nACCESS GRANTED : Welcome back " + current_user + "!")
             # A list of all user accounts should be displayed if the user is an Administrator.
+            if current_role == 'admin':
+                print("Here is a list of all current users :")
+                for i in users:
+                    print(users[i])
+            break
     else:
-        print("You are not a user!")
+        print("Sorry your information was NOT found!")
+        print("ACCESS DENIED!")
 elif verify.lower() == 'n':
     # If the user does not have an account, they will be prompted to enter a new username and password.
-    new_acc_username = input("To create a new account please enter in a username : ")
-    new_acc_pass = input("Please enter in a password : ")
+    new_acc_username = input("Please enter in your desired user name: ")
+    new_acc_pass = input("Please enter in your desired password: ")
 
     new_user = new_acc_username + ' ' + new_acc_pass
+    print("Thank you, your information has been stored.")
+    print("\nACCESS GRANTED: Welcome! ")
+
+
     # This information will then be inserted and stored in the dictionary.
 else:
     print("Error - Invalid Input!")
-
